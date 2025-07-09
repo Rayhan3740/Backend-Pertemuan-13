@@ -18,6 +18,14 @@ router.get('/', async (req, res) => {
     res.status(error ? 400 : 200).json(error || data);
 });
 
+// READ by ID
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { data, error } = await supabase.from('matakuliah').select('*').eq('id', id).single();
+    res.status(error ? 400 : 200).json(error || data);
+});
+
+
 // UPDATE
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
